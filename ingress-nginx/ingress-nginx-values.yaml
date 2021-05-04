@@ -45,6 +45,7 @@ controller:
 
   extraArgs:
     alsologtostderr: true
+    ingress-class: nginx
   
   hostPort:
     enabled: true

@@ -34,6 +34,9 @@ data:
           matchers:
             - field_format:
                 format: '${POD_NAMESPACE}/${POD_NAME}'
+      - drop_fields:
+          fields: ["agent","input"]
+          ignore_missing: true          
                          
     output.kafka:
       enabled: false

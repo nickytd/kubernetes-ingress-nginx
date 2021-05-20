@@ -3,6 +3,10 @@
 set -eo pipefail
 
 dir=$(dirname $0)
+source $dir/.includes.sh
+
+check_executables
+check_helm_chart "hingress-nginx/ingress-nginx"
 
 echo "setting up ingress nginx controller stack"
 

@@ -44,9 +44,10 @@ controller:
         name: filebeat-nginx-config    
 
   extraArgs:
+    enable-ssl-passthrough: ""
     alsologtostderr: true
-    ingress-class: nginx
-  
+    ingress-class: "nginx"
+      
   hostPort:
     enabled: true
     enableHttp: true

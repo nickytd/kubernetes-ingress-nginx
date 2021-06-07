@@ -2,47 +2,6 @@
 ## Ref: https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/nginx-configuration/index.md
 ##
 controller:
-  extraContainers:
-    - name: filebeat
-      image: docker.elastic.co/beats/filebeat-oss:7.10.2
-      args:
-        - -c
-        - /usr/share/filebeat/filebeat.yml
-        - -e
-      env:
-        - name: POD_NAME
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.name
-        - name: POD_NAMESPACE
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.namespace
-      resources:
-        requests:
-          memory: 50Mi
-        limits:
-          memory: 150Mi        
-      volumeMounts:
-        - name: nginx-log
-          mountPath: /var/log/nginx
-        - name: filebeat-config
-          mountPath: /usr/share/filebeat/filebeat.yml
-          subPath: filebeat.yml
-
-        
-  extraVolumeMounts:
-    - name: nginx-log
-      mountPath: /var/log/nginx
-
-  extraVolumes:
-    - name: nginx-log
-      emptyDir: {}  
-    - name: filebeat-config
-      configMap:
-        defaultMode: 420
-        name: filebeat-nginx-config    
-
   extraArgs:
     enable-ssl-passthrough: ""
     alsologtostderr: true
@@ -71,10 +30,10 @@ controller:
     enabled: false
       
   metrics:
-    enabled: true
+    enabled: false
     
     serviceMonitor:
-      enabled: true
+      enabled: false
       namespaceSelector:
         any: true
 

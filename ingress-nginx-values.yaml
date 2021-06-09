@@ -2,6 +2,16 @@
 ## Ref: https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/nginx-configuration/index.md
 ##
 controller:
+  affinity:
+    nodeAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 1
+        preference:
+          matchExpressions:
+          - key: kubernetes.io/hostname
+            operator: In
+            values:
+            - minikube
   extraArgs:
     enable-ssl-passthrough: ""
     alsologtostderr: true
@@ -11,7 +21,6 @@ controller:
     enabled: true
     enableHttp: true
     enableHttps: true
-
     ports:
       http: 80
       https: 443
